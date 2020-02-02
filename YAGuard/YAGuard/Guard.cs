@@ -12,17 +12,17 @@ namespace YAGuard
     {
         #region Generic Checks
 
-        public static void AgainstCondition(bool condition, string argName = null, string message = null)
-        {
-            if (condition)
-                throw new ArgumentException(message ?? $"Argument {argName ?? ""} did not satisfy condition.");
-        }
+        //public static void AgainstCondition(bool condition, string argName = null, string message = null)
+        //{
+        //    if (condition)
+        //        throw new ArgumentException(message ?? $"Argument {argName ?? ""} did not satisfy condition.");
+        //}
 
-        public static void AgainstCondition(Func<bool> condition, string argName = null, string message = null)
-        {
-            if (!condition())
-                throw new ArgumentException(message ?? $"Argument {argName ?? ""} did not satisfy condition.");
-        }
+        //public static void AgainstCondition(Func<bool> condition, string argName = null, string message = null)
+        //{
+        //    if (!condition())
+        //        throw new ArgumentException(message ?? $"Argument {argName ?? ""} did not satisfy condition.");
+        //}
 
         public static void AgainstNull(object argValue, string argName, string message = null)
         {
@@ -31,9 +31,17 @@ namespace YAGuard
         }
 
         // TODO: Test
-        public static void NotNull<TValue>(object arg)
+        public static void AgainstNull(object arg)
+        {
+            ArgHelper.CheckUsage<object>(arg);
+            Guard.AgainstNull(ArgHelper.GetProp0Value<object>(arg), ArgHelper.GetProp0Name(arg));
+        }
+
+        // TODO: Test
+        public static void AgainstNull<TValue>(object arg)
         {
             ArgHelper.CheckUsage<TValue>(arg);
+            ArgHelper.AssertType(arg, typeof(TValue));
             Guard.AgainstNull(ArgHelper.GetProp0Value<TValue>(arg), ArgHelper.GetProp0Name(arg));
         }
 
