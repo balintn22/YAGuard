@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp2.2;net452</TargetFrameworks>
+    <Authors>Balint Nagy</Authors>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Yet Another Guard argument validation package.
+The need to provide the name of the argument was driving me mad - here we go, without that.
+Usage:
+public void MyFunc(string myArg)
+{
+    Guard.AgainstNull(myArg, nameof(myArg));
+    // OR
+    Guard.AgainstNull(new {myArg});
+}
+In case myArg is null, this will throw an ArgumentNullException with the correct argument name.
+The alternative where you provide the argument nameis fast. The one without is convenient (it uses reflection, so it's slower). You can decide which one you need in any case.</Description>
+    <Copyright>Balint Nagy</Copyright>
+    <PackageLicenseUrl>https://github.com/balintn22/YAGuard/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/balintn22/YAGuard</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/balintn22/YAGuard</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <FileVersion>0.0.0.0</FileVersion>
+    <Version>0.0.0</Version>
+  </PropertyGroup>
+
+</Project>

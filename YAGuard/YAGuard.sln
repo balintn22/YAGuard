@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.852
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YAGuard", "YAGuard\YAGuard.csproj", "{F088AC88-AE79-4934-B958-92B3278437C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YAGuard.Test", "YAGuard.Test\YAGuard.Test.csproj", "{E4029928-F346-4D19-960F-34AAFCCEEE4F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F088AC88-AE79-4934-B958-92B3278437C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F088AC88-AE79-4934-B958-92B3278437C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F088AC88-AE79-4934-B958-92B3278437C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F088AC88-AE79-4934-B958-92B3278437C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4029928-F346-4D19-960F-34AAFCCEEE4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4029928-F346-4D19-960F-34AAFCCEEE4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4029928-F346-4D19-960F-34AAFCCEEE4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4029928-F346-4D19-960F-34AAFCCEEE4F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E14E6D29-0AFE-400D-803F-93C952AFE690}
+	EndGlobalSection
+EndGlobal
