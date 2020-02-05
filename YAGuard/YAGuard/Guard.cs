@@ -12,11 +12,11 @@ namespace YAGuard
     {
         #region Generic Checks
 
-        //public static void AgainstCondition(bool condition, string argName = null, string message = null)
-        //{
-        //    if (condition)
-        //        throw new ArgumentException(message ?? $"Argument {argName ?? ""} did not satisfy condition.");
-        //}
+        public static void AgainstCondition(bool condition, string argName = null, string message = null)
+        {
+            if (condition)
+                throw new ArgumentException(message ?? $"Argument {argName ?? ""} did not satisfy condition.");
+        }
 
         //public static void AgainstCondition(Func<bool> condition, string argName = null, string message = null)
         //{

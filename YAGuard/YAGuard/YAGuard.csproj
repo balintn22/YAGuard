@@ -22,7 +22,20 @@ The alternative where you provide the argument nameis fast. The one without is c
     <RepositoryType>github</RepositoryType>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
     <FileVersion>0.0.0.0</FileVersion>
-    <Version>0.0.0</Version>
+    <Version>0.0.4</Version>
+    <PackageReleaseNotes>Yet Another Guard argument validation package.
+The need to provide the name of the argument was driving me mad - here we go, without that.
+Usage:
+public void MyFunc(string myArg)
+{
+    Guard.AgainstNull(myArg, nameof(myArg));
+    // OR
+    Guard.AgainstNull(new {myArg});
+}
+In case myArg is null, this will throw an ArgumentNullException with the correct argument name.
+The alternative where you provide the argument nameis fast. The one without is convenient (it uses reflection, so it's slower). You can decide which one you need in any case.</PackageReleaseNotes>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>StrongNamingKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp2.2|AnyCPU'">

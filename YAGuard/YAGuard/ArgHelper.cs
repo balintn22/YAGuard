@@ -38,7 +38,7 @@ namespace YAGuard
         internal static TValue GetProp0Value<TValue>(object arg)
         {
             Guard.AgainstNull(arg, nameof(arg));
-            AssertType(arg, typeof(TValue));
+            //AssertType(arg, typeof(TValue));
             return (TValue)arg.GetType().GetProperties()[0].GetValue(arg);
         }
 
@@ -61,8 +61,8 @@ namespace YAGuard
                 throw new ArgumentException($"Invalid use of SafeAssign.Assign(). The anonymous object argument should have a single property, containing the argument to test and return. Usage example:\n{usage}");
 
             // Check that the single property of arg is of type TValue
-            if (props[0].PropertyType != typeof(TValue))
-                throw new ArgumentException($"Invalid use of SafeAssign.Assign(). The anonymous object argument type {props[0].PropertyType.Name} doesn't match the expected result type {nameof(TValue)}. Usage example:\n{usage}");
+            //if (props[0].PropertyType != typeof(TValue))
+            //    throw new ArgumentException($"Invalid use of SafeAssign.Assign(). The anonymous object argument type {props[0].PropertyType.Name} doesn't match the expected result type {nameof(TValue)}. Usage example:\n{usage}");
         }
     }
 }

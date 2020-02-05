@@ -42,6 +42,15 @@ namespace YAGuard.Test
         [DataRow("")]
         [DataRow(" ")]
         [DataRow("blah")]
+        public void AgainstNullT_ShouldSucceed_EvenIfTypeIsString(string goodValue)
+        {
+            Guard.AgainstNull(new { goodValue });
+        }
+
+        [TestMethod]
+        [DataRow("")]
+        [DataRow(" ")]
+        [DataRow("blah")]
         public void AgainstNullT_ShouldSucceed(string goodValue)
         {
             Guard.AgainstNull<string>(new { goodValue });
