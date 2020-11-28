@@ -42,10 +42,10 @@ Added support for the style
 which automatically resolves the name of the argument.
 
 Removed support for the style
-  Guard.Against...(myArg, new { myArg });
+  Guard.Against...(new { myArg });
 
 ##v0.0.x
 Implemented two styles:
    Guard.Against...(myArg, argName);
-   Guard.Against...(myArg, new { myArg });
+   Guard.Against...(new { myArg });
 the second one to help avoid typing the name of the argument. But it didn't really help when compared to nameof(myArg). 
