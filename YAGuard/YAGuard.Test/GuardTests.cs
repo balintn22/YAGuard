@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -16,76 +17,15 @@ namespace YAGuard.Test
             Guard.AgainstNull(new { goodValue });
         }
 
-        [TestMethod]
+        [DataTestMethod]
         [DataRow(null)]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void AgainstNull_ShouldFail(object badValue)
+        public void AgainstNull(string blah)
         {
-            Guard.AgainstNull(new { badValue });
+            try { Guard.AgainstNull(blah); }
+            catch (ArgumentNullException ex) { ex.Message.Should().Be("Parameter may not be null\r\nParameter name: blah"); }
+            catch { Assert.Fail(); }
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void AgainstNull_ShouldFail_WhenIncorrectlyInvoked1()
-        {
-            Guard.AgainstNull("argument is not provided as a property of an anonymous object");
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void AgainstNull_ShouldFail_WhenIncorrectlyInvoked2()
-        {
-            Guard.AgainstNull(new { one = "anonymous argument", two = "has too many properties" });
-        }
-
-        [TestMethod]
-        [DataRow("")]
-        [DataRow(" ")]
-        [DataRow("blah")]
-        public void AgainstNullT_ShouldSucceed_EvenIfTypeIsString(string goodValue)
-        {
-            Guard.AgainstNull(new { goodValue });
-        }
-
-        [TestMethod]
-        [DataRow("")]
-        [DataRow(" ")]
-        [DataRow("blah")]
-        public void AgainstNullT_ShouldSucceed(string goodValue)
-        {
-            Guard.AgainstNull<string>(new { goodValue });
-        }
-
-        [TestMethod]
-        [DataRow(null)]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void AgainstNullT_ShouldFail(string badValue)
-        {
-            Guard.AgainstNull<string>(new { badValue });
-        }
-
-        // TODO: This test is questionable. Should it really fail, if the runtime type is correct?
-        [TestMethod]
-        [DataRow("string")]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void AgainstNullT_ShouldFail(object badValue)
-        {
-            Guard.AgainstNull<string>(new { badValue });
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void AgainstNullT_ShouldFail_WhenIncorrectlyInvoked1()
-        {
-            Guard.AgainstNull<string>("argument is not provided as a property of an anonymous object");
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void AgainstNullT_ShouldFail_WhenIncorrectlyInvoked2()
-        {
-            Guard.AgainstNull<string>(new { one = "anonymous argument", two = "has too many properties" });
-        }
         #endregion NotNull
     }
 }

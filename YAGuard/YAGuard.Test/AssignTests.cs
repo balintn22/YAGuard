@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -7,22 +8,26 @@ namespace YAGuard.Test
     public class AssignTests
     {
         #region NotNull
+
         [TestMethod]
         [DataRow("")]
         [DataRow(" ")]
         [DataRow("blah")]
         public void NotNull_ShouldSucceed(string goodValue)
         {
-            string result = Assign.NotNull<string>(new { goodValue });
+            string result = Assign.NotNull<string>(goodValue);
+            result.Should().Be(goodValue);
         }
 
         [TestMethod]
         [DataRow(null)]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void NotNull_ShouldFail(string badValue)
         {
-            string result = Assign.NotNull<string>(new { badValue });
+            try { string result = Assign.NotNull<string>(badValue); }
+            catch (ArgumentNullException ex) { ex.Message.Should().Be("Parameter may not be null\r\nParameter name: badValue"); }
+            catch { Assert.Fail(); }
         }
+
         #endregion NotNull
     }
 }
