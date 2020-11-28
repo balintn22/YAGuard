@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace YAGuard
@@ -27,7 +26,7 @@ namespace YAGuard
             }
         }
 
-        /// <summary>Validates an argument.</summary>
+        /// <summary>Validates a condition. Throws if condiotion is false.</summary>
         /// <exception cref="ArgumentException"/>
         public static void AgainstCondition(bool condition, string argName = null, string message = null)
         {
@@ -35,7 +34,8 @@ namespace YAGuard
                 throw new ArgumentException(message ?? $"Argument {argName ?? ArgHelper.ArgName()} did not satisfy condition.");
         }
 
-        // TODO: Test
+        /// <summary>Validates an argument against a set of acceptable values.</summary>
+        /// <exception cref="ArgumentException"/>
         public static void AgainstUnsupportedValues<T>(
             T argumentValue, IEnumerable<T> supportedValues, string argName = null, string message = null)
         {
@@ -52,6 +52,8 @@ namespace YAGuard
 
         #region String Checks
 
+        /// <summary>Throws if the specified value is not a string representation of an Int32.</summary>
+        /// <exception cref="ArgumentException"/>
         public static void AgainstNonIntString(string shouldBeInt, string argName = null)
         {
             if (!Int32.TryParse(shouldBeInt, out int dummy))
@@ -59,6 +61,8 @@ namespace YAGuard
                     $"'{shouldBeInt}' is expected to be an integer.", argName ?? ArgHelper.ArgName());
         }
 
+        /// <summary>Throws if the specified value is null or an empty string.</summary>
+        /// <exception cref="ArgumentException"/>
         public static void AgainstNullOrEmptyString(string argumentValue, string argName = null, string message = null)
         {
             if (string.IsNullOrEmpty(argumentValue))
@@ -66,6 +70,8 @@ namespace YAGuard
                     message ?? "Parameter cannot be null or an empty string.", argName ?? ArgHelper.ArgName());
         }
 
+        /// <summary>Throws if the specified value is null, an empty string or whitespace.</summary>
+        /// <exception cref="ArgumentException"/>
         public static void AgainstNullOrWhiteSpaceString(
             string argumentValue, string argName = null, string message = null)
         {
@@ -74,6 +80,8 @@ namespace YAGuard
                     message ?? "Parameter cannot be null or whitespace.", argName ?? ArgHelper.ArgName());
         }
 
+        /// <summary>Throws if the specified value is a string that is too long.</summary>
+        /// <exception cref="ArgumentException"/>
         public static void AgainstLongString(
             string argumentValue, int maxAcceptableLength, string argName = null, string message = null)
         {
@@ -88,6 +96,8 @@ namespace YAGuard
 
         #region Collections
 
+        /// <summary>Throws if the specified value is null or an empty collection.</summary>
+        /// <exception cref="ArgumentException"/>
         public static void AgainstNullOrEmptyCollection<T>(
             IEnumerable<T> argumentValue, string argName = null, string message = null)
         {
@@ -100,14 +110,18 @@ namespace YAGuard
 
         #region Int Checks
 
-        public static void AgainstNegativeInt(int argumentValue, string argName = null, string message = null)
+        /// <summary>Throws if the specified integer value is negative.</summary>
+        /// <exception cref="ArgumentException"/>
+        public static void AgainstNegativeInt(Int64 argumentValue, string argName = null, string message = null)
         {
             if (argumentValue < 0)
                 throw new ArgumentException(
                     message ?? "Parameter cannot be negative.", argName ?? ArgHelper.ArgName());
         }
 
-        public static void AgainstNonPositiveInt(int argumentValue, string argName = null, string message = null)
+        /// <summary>Throws if the specified integer value is zero or negative.</summary>
+        /// <exception cref="ArgumentException"/>
+        public static void AgainstNonPositiveInt(Int64 argumentValue, string argName = null, string message = null)
         {
             if (argumentValue <= 0)
                 throw new ArgumentException(
