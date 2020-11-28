@@ -1,7 +1,7 @@
 # YAGuard
 
 Yet Another Guard argument validation package.
-There's no need to provide the name of the argument being checked.
+Provide the argument for validation, its name is automatically resolved in the resulting exception.
 Usage:
 public void MyFunc(string myArg)
 {

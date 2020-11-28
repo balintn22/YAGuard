@@ -21,20 +21,15 @@ will set result to source in case it is not null, or throw an appropriate Argume
     <PackageProjectUrl>https://github.com/balintn22/YAGuard</PackageProjectUrl>
     <RepositoryUrl>https://github.com/balintn22/YAGuard</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.0.0</Version>
-    <PackageReleaseNotes>Yet Another Guard argument validation package.
-The need to provide the name of the argument was driving me mad - here we go, without that.
-Usage:
-public void MyFunc(string myArg)
-{
-    Guard.AgainstNull(myArg, nameof(myArg));
-    // OR
-    Guard.AgainstNull(new {myArg});
-}
-In case myArg is null, this will throw an ArgumentNullException with the correct argument name.
-The alternative where you provide the argument nameis fast. The one without is convenient (it uses reflection, so it's slower). You can decide which one you need in any case.</PackageReleaseNotes>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
+    <Version>1.0.1</Version>
+    <PackageReleaseNotes>Added support for the style
+  Guard.Against...(myArg);
+which automatically resolves the name of the argument.
+
+Removed support for the style
+  Guard.Against...(myArg, new { myArg });</PackageReleaseNotes>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>StrongNamingKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
