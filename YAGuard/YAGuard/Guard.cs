@@ -7,6 +7,7 @@ namespace YAGuard
     /// <summary>
     /// Static class to implement method argument validation.
     /// In case of validation errors, exceptions are thrown, that contain the name of the offending argument.
+    /// Otherwise methods return the validated argument.
     /// </summary>
     /// <example>
     /// Guard.AgainstNull(myString);
@@ -17,13 +18,14 @@ namespace YAGuard
         #region Generic Checks
 
         /// <summary>Validates an argument.</summary>
+        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentNullException"/>
-        public static void AgainstNull(object arg, string argName = null, string message = null)
+        public static T AgainstNull<T>(T arg, string argName = null, string message = null)
         {
             if (arg == null)
-            {
                 throw new ArgumentNullException(argName ?? ArgHelper.ArgName(), message ?? "Parameter may not be null");
-            }
+
+            return arg;
         }
 
         /// <summary>Validates a condition. Throws if condiotion is false.</summary>
@@ -35,17 +37,20 @@ namespace YAGuard
         }
 
         /// <summary>Validates an argument against a set of acceptable values.</summary>
+        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
-        public static void AgainstUnsupportedValues<T>(
-            T argumentValue, IEnumerable<T> supportedValues, string argName = null, string message = null)
+        public static T AgainstUnsupportedValues<T>(
+            T arg, IEnumerable<T> supportedValues, string argName = null, string message = null)
         {
-            if ((supportedValues == null) || !supportedValues.Contains(argumentValue))
+            if ((supportedValues == null) || !supportedValues.Contains(arg))
             {
                 throw new ArgumentException(
                     message
                     ?? $"Argument value not supported. Supported values are {string.Join(", ", supportedValues)}",
                     argName ?? ArgHelper.ArgName());
             }
+
+            return arg;
         }
 
         #endregion Generic Checks
@@ -53,43 +58,56 @@ namespace YAGuard
         #region String Checks
 
         /// <summary>Throws if the specified value is not a string representation of an Int32.</summary>
+        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
-        public static void AgainstNonIntString(string shouldBeInt, string argName = null)
+        public static string AgainstNonIntString(string arg, string argName = null)
         {
-            if (!Int32.TryParse(shouldBeInt, out int dummy))
+            if (!Int32.TryParse(arg, out int dummy))
                 throw new ArgumentException(
-                    $"'{shouldBeInt}' is expected to be an integer.", argName ?? ArgHelper.ArgName());
+                    $"'{arg}' is expected to be an integer.", argName ?? ArgHelper.ArgName());
+
+            return arg;
         }
 
         /// <summary>Throws if the specified value is null or an empty string.</summary>
+        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
-        public static void AgainstNullOrEmptyString(string argumentValue, string argName = null, string message = null)
+        public static string AgainstNullOrEmptyString(
+            string arg, string argName = null, string message = null)
         {
-            if (string.IsNullOrEmpty(argumentValue))
+            if (string.IsNullOrEmpty(arg))
                 throw new ArgumentException(
                     message ?? "Parameter cannot be null or an empty string.", argName ?? ArgHelper.ArgName());
+
+            return arg;
         }
 
         /// <summary>Throws if the specified value is null, an empty string or whitespace.</summary>
+        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
-        public static void AgainstNullOrWhiteSpaceString(
-            string argumentValue, string argName = null, string message = null)
+        public static string AgainstNullOrWhiteSpaceString(
+            string arg, string argName = null, string message = null)
         {
-            if (string.IsNullOrWhiteSpace(argumentValue))
+            if (string.IsNullOrWhiteSpace(arg))
                 throw new ArgumentException(
                     message ?? "Parameter cannot be null or whitespace.", argName ?? ArgHelper.ArgName());
+
+            return arg;
         }
 
         /// <summary>Throws if the specified value is a string that is too long.</summary>
+        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
-        public static void AgainstLongString(
-            string argumentValue, int maxAcceptableLength, string argName = null, string message = null)
+        public static string AgainstLongString(
+            string arg, int maxAcceptableLength, string argName = null, string message = null)
         {
-            if (!string.IsNullOrWhiteSpace(argumentValue) && (argumentValue.Length > maxAcceptableLength))
+            if (!string.IsNullOrWhiteSpace(arg) && (arg.Length > maxAcceptableLength))
                 throw new ArgumentException(
                     message
-                    ?? string.Format("String argument too long, {0} characters, max {1} allowed.", argumentValue.Length, maxAcceptableLength),
+                    ?? string.Format("String argument too long, {0} characters, max {1} allowed.", arg.Length, maxAcceptableLength),
                     argName ?? ArgHelper.ArgName());
+
+            return arg;
         }
 
         #endregion String Checks
@@ -97,13 +115,16 @@ namespace YAGuard
         #region Collections
 
         /// <summary>Throws if the specified value is null or an empty collection.</summary>
+        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
-        public static void AgainstNullOrEmptyCollection<T>(
-            IEnumerable<T> argumentValue, string argName = null, string message = null)
+        public static IEnumerable<T> AgainstNullOrEmptyCollection<T>(
+            IEnumerable<T> arg, string argName = null, string message = null)
         {
-            if ((argumentValue == null) || (argumentValue.Count() == 0))
+            if ((arg == null) || (arg.Count() == 0))
                 throw new ArgumentException(
                     message ?? "Parameter cannot be null or an empty collection.", argName ?? ArgHelper.ArgName());
+
+            return arg;
         }
 
         #endregion Collections
@@ -111,21 +132,27 @@ namespace YAGuard
         #region Int Checks
 
         /// <summary>Throws if the specified integer value is negative.</summary>
+        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
-        public static void AgainstNegativeInt(Int64 argumentValue, string argName = null, string message = null)
+        public static Int64 AgainstNegativeInt(Int64 arg, string argName = null, string message = null)
         {
-            if (argumentValue < 0)
+            if (arg < 0)
                 throw new ArgumentException(
                     message ?? "Parameter cannot be negative.", argName ?? ArgHelper.ArgName());
+
+            return arg;
         }
 
         /// <summary>Throws if the specified integer value is zero or negative.</summary>
+        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
-        public static void AgainstNonPositiveInt(Int64 argumentValue, string argName = null, string message = null)
+        public static Int64 AgainstNonPositiveInt(Int64 arg, string argName = null, string message = null)
         {
-            if (argumentValue <= 0)
+            if (arg <= 0)
                 throw new ArgumentException(
                     message ?? "Parameter cannot be negative or zero.", argName ?? ArgHelper.ArgName());
+
+            return arg;
         }
 
         #endregion Int Checks

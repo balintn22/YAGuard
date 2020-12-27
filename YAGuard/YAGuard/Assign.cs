@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace YAGuard
 {
@@ -10,6 +11,7 @@ namespace YAGuard
     /// When sourceString is not null, will set result to  the value of SourceString.
     /// When sourceString is null, will throw an ArgumentNullException, with parameter name set to 'sourceString'.
     /// </example>
+     [Obsolete("Use the corresponding Guard statements instead.")]
     public static class Assign
     {
         #region Generic

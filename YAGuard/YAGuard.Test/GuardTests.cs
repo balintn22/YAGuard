@@ -14,7 +14,9 @@ namespace YAGuard.Test
         [DataRow("blah")]
         public void AgainstNull_ShouldSucceed(object goodValue)
         {
-            Guard.AgainstNull(new { goodValue });
+            var actualValue = Guard.AgainstNull(goodValue);
+
+            actualValue.Should().Be(goodValue);
         }
 
         [DataTestMethod]

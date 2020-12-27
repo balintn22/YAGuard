@@ -6,6 +6,8 @@ Usage:
 public void MyFunc(string myArg)
 {
     Guard.AgainstNull(myArg);
+    // or
+    string validatedArg = Guard.AgainstNull(myArg);
 }
 In case myArg is null, this will throw an ArgumentNullException with the correct argument name.
 
@@ -30,12 +32,15 @@ Use intellisense for a full list of supported validation methods.
 To use a single line of code to validate and assign values to variables:
   public void MyMethod(string myArg)
   {
-    MyProperty = Assign.NotNull(myArg);     // Will throw ArgumentNullException when myArg is null, or assign myArg to MyProperty if not null.
+    MyProperty = Guard.AgainstNull(myArg);  // Will throw ArgumentNullException when myArg is null, or assign myArg to MyProperty if not null.
     ...
   }
   
 
 #Release History
+##v1.0.4
+Retired the Assign class, changed Guard methods to return the argument value.
+
 ##v1.0.x
 Added support for the style
   Guard.Against...(myArg);

@@ -5,6 +5,7 @@ using System;
 namespace YAGuard.Test
 {
     [TestClass]
+    [Obsolete("Assign is obsolete, remove these tests when Assign is removed.")]
     public class AssignTests
     {
         #region NotNull
