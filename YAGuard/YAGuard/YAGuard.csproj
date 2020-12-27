@@ -1,22 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.2;net452</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.1;net452;netstandard2.0</TargetFrameworks>
     <Authors>Balint Nagy</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Yet Another Guard argument validation package.
-There's no need to provide the name of the argument being checked.
-Usage: (curly braces replaced with braces, otherwise VS can't open Project Properties)
+The speciality is that validation statements only take the argument, but they don't need the name of the argument as a second argument; still, the name of the argumnet is included in validation exceptions thrown.
+Usage:
 public void MyFunc(string myArg)
-(
+{
     Guard.AgainstNull(myArg);
     // or
     string validatedArg = Guard.AgainstNull(myArg);
-)
+}
 In case myArg is null, this will throw an ArgumentNullException with the correct argument name.
 
 Supports single line argument checking and assignment as well:
-string result = Assign.NotNull(string source);
+string result = Guard.AgainstNull(string source);
 will set result to source in case it is not null, or throw an appropriate ArgumentNullException in case it is null.</Description>
     <Copyright>Balint Nagy</Copyright>
     <PackageLicenseUrl>https://github.com/balintn22/YAGuard/blob/master/LICENSE</PackageLicenseUrl>
@@ -27,12 +27,15 @@ will set result to source in case it is not null, or throw an appropriate Argume
     <FileVersion>1.0.4.0</FileVersion>
     <Version>1.0.4</Version>
     <PackageReleaseNotes>Assign retired. Instead, Guard methods now return the value of the argument, so they can be used in assignments like
-    var validatedArg = Guard.AgainstNull(thisShouldNotBeBull);</PackageReleaseNotes>
+    var validatedArg = Guard.AgainstNull(thisShouldNotBeBull);
+
+Retargeted to dotnet core 2.1 (instead of the no longer supported 2.2).
+Added the netstandard2.0 target as well.</PackageReleaseNotes>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>StrongNamingKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp2.2|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp2.1|AnyCPU'">
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
 
