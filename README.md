@@ -51,6 +51,7 @@ reliably resolves the name of the parameter in most scenarios.
 The simple style
   Guard.AgainstNull(myArg)
 works correctly when there's a single method parameter, or when the type of the guarded parameter is unique in the argument list.
+In case you are validating anything other than a method parameter, use the expression style, as the simple style uses the method declaration to resolve the parameter name.
 In case there are two parameters of the same type, the parameter name in the exception thrown will contain both of their names.
 In such cases, use the expression style.
 
