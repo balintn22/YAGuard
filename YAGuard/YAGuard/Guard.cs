@@ -23,7 +23,9 @@ namespace YAGuard
     {
         #region Generic Checks
 
-        /// <summary>Validates an argument.</summary>
+        /// <summary>
+        /// Validates an argument.
+        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
         /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentNullException"/>
         public static T AgainstNull<T>(T arg, string argName = null, string message = null)
@@ -34,7 +36,9 @@ namespace YAGuard
             return arg;
         }
 
-        /// <summary>Validates a condition. Throws if condition is false.</summary>
+        /// <summary>
+        /// Validates a condition. Throws if condition is false.
+        /// </summary>
         /// <exception cref="ArgumentException"/>
         public static void AgainstCondition(bool condition, string argName = null, string message = null)
         {
@@ -42,7 +46,10 @@ namespace YAGuard
                 throw new ArgumentException(message ?? $"Guard condition was not met.", argName);
         }
 
-        /// <summary>Validates an argument against a set of acceptable values.</summary>
+        /// <summary>
+        /// Validates an argument against a set of acceptable values.
+        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
+        /// </summary>
         /// <param name="argName">The name of the argument to include in case of an exception. If omitted, the argumnet name in the exception will include an educated guess.</param>
         /// <returns>In case the valisation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
@@ -65,7 +72,10 @@ namespace YAGuard
 
         #region String Checks
 
-        /// <summary>Throws if the specified value is not a string representation of an Int32.</summary>
+        /// <summary>
+        /// Throws if the specified value is not a string representation of an Int32.
+        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
+        /// </summary>
         /// <returns>In case the valisation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static string AgainstNonIntString(string arg, string argName = null)
@@ -77,7 +87,10 @@ namespace YAGuard
             return arg;
         }
 
-        /// <summary>Throws if the specified value is null or an empty string.</summary>
+        /// <summary>
+        /// Throws if the specified value is null or an empty string.
+        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
+        /// </summary>
         /// <returns>In case the valisation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static string AgainstNullOrEmptyString(
@@ -90,7 +103,10 @@ namespace YAGuard
             return arg;
         }
 
-        /// <summary>Throws if the specified value is null, an empty string or whitespace.</summary>
+        /// <summary>
+        /// Throws if the specified value is null, an empty string or whitespace.
+        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
+        /// </summary>
         /// <returns>In case the valisation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static string AgainstNullOrWhiteSpaceString(
@@ -103,7 +119,10 @@ namespace YAGuard
             return arg;
         }
 
-        /// <summary>Throws if the specified value is a string that is too long.</summary>
+        /// <summary>
+        /// Throws if the specified value is a string that is too long.
+        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
+        /// </summary>
         /// <returns>In case the valisation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static string AgainstLongString(
@@ -123,7 +142,10 @@ namespace YAGuard
 
         #region Collections
 
-        /// <summary>Throws if the specified value is null or an empty collection.</summary>
+        /// <summary>
+        /// Throws if the specified value is null or an empty collection.
+        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
+        /// </summary>
         /// <returns>In case the valisation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static IEnumerable<T> AgainstNullOrEmptyCollection<T>(
@@ -141,7 +163,10 @@ namespace YAGuard
 
         #region Int Checks
 
-        /// <summary>Throws if the specified integer value is negative.</summary>
+        /// <summary>
+        /// Throws if the specified integer value is negative.
+        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
+        /// </summary>
         /// <returns>In case the valisation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static Int64 AgainstNegativeInt(Int64 arg, string argName = null, string message = null)
@@ -153,7 +178,10 @@ namespace YAGuard
             return arg;
         }
 
-        /// <summary>Throws if the specified integer value is zero or negative.</summary>
+        /// <summary>
+        /// Throws if the specified integer value is zero or negative.
+        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
+        /// </summary>
         /// <returns>In case the valisation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static Int64 AgainstNonPositiveInt(Int64 arg, string argName = null, string message = null)
