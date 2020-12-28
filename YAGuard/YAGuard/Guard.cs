@@ -4,6 +4,12 @@ using System.Linq;
 
 namespace YAGuard
 {
+    // This partial class implementation contains Guard methods that take a single,
+    // plain method argument. They work well when
+    //  - the method has a single argument
+    //  - the guarded argument can be identified by its type
+    // In all other cases, use the expression overloads, like Guard.AgainstNull( () => myArg )
+
     /// <summary>
     /// Static class to implement method argument validation.
     /// In case of validation errors, exceptions are thrown, that contain the name of the offending argument.
@@ -13,30 +19,31 @@ namespace YAGuard
     /// Guard.AgainstNull(myString);
     /// Will throw ArgumentNullException with argument name 'myString'.
     /// </example>
-    public static class Guard
+    public static partial class Guard
     {
         #region Generic Checks
 
         /// <summary>Validates an argument.</summary>
-        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
+        /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentNullException"/>
         public static T AgainstNull<T>(T arg, string argName = null, string message = null)
         {
             if (arg == null)
-                throw new ArgumentNullException(argName ?? ArgHelper.ArgName(), message ?? "Parameter may not be null");
+                throw new ArgumentNullException(argName ?? ArgHelper.ArgName(typeof(T)), message ?? "Parameter may not be null");
 
             return arg;
         }
 
-        /// <summary>Validates a condition. Throws if condiotion is false.</summary>
+        /// <summary>Validates a condition. Throws if condition is false.</summary>
         /// <exception cref="ArgumentException"/>
         public static void AgainstCondition(bool condition, string argName = null, string message = null)
         {
             if (condition)
-                throw new ArgumentException(message ?? $"Argument {argName ?? ArgHelper.ArgName()} did not satisfy condition.");
+                throw new ArgumentException(message ?? $"Guard condition was not met.", argName);
         }
 
         /// <summary>Validates an argument against a set of acceptable values.</summary>
+        /// <param name="argName">The name of the argument to include in case of an exception. If omitted, the argumnet name in the exception will include an educated guess.</param>
         /// <returns>In case the valisation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static T AgainstUnsupportedValues<T>(
@@ -47,13 +54,14 @@ namespace YAGuard
                 throw new ArgumentException(
                     message
                     ?? $"Argument value not supported. Supported values are {string.Join(", ", supportedValues)}",
-                    argName ?? ArgHelper.ArgName());
+                    argName ?? ArgHelper.ArgName(typeof(T)));
             }
 
             return arg;
         }
 
         #endregion Generic Checks
+
 
         #region String Checks
 
@@ -64,7 +72,7 @@ namespace YAGuard
         {
             if (!Int32.TryParse(arg, out int dummy))
                 throw new ArgumentException(
-                    $"'{arg}' is expected to be an integer.", argName ?? ArgHelper.ArgName());
+                    $"'{arg}' is expected to be an integer.", argName ?? ArgHelper.ArgName(typeof(string)));
 
             return arg;
         }
@@ -77,7 +85,7 @@ namespace YAGuard
         {
             if (string.IsNullOrEmpty(arg))
                 throw new ArgumentException(
-                    message ?? "Parameter cannot be null or an empty string.", argName ?? ArgHelper.ArgName());
+                    message ?? "Parameter cannot be null or an empty string.", argName ?? ArgHelper.ArgName(typeof(string)));
 
             return arg;
         }
@@ -90,7 +98,7 @@ namespace YAGuard
         {
             if (string.IsNullOrWhiteSpace(arg))
                 throw new ArgumentException(
-                    message ?? "Parameter cannot be null or whitespace.", argName ?? ArgHelper.ArgName());
+                    message ?? "Parameter cannot be null or whitespace.", argName ?? ArgHelper.ArgName(typeof(string)));
 
             return arg;
         }
@@ -105,12 +113,13 @@ namespace YAGuard
                 throw new ArgumentException(
                     message
                     ?? string.Format("String argument too long, {0} characters, max {1} allowed.", arg.Length, maxAcceptableLength),
-                    argName ?? ArgHelper.ArgName());
+                    argName ?? ArgHelper.ArgName(typeof(string)));
 
             return arg;
         }
 
         #endregion String Checks
+
 
         #region Collections
 
@@ -122,12 +131,13 @@ namespace YAGuard
         {
             if ((arg == null) || (arg.Count() == 0))
                 throw new ArgumentException(
-                    message ?? "Parameter cannot be null or an empty collection.", argName ?? ArgHelper.ArgName());
+                    message ?? "Parameter cannot be null or an empty collection.", argName ?? ArgHelper.ArgName(typeof(IEnumerable<T>)));
 
             return arg;
         }
 
         #endregion Collections
+
 
         #region Int Checks
 
@@ -138,7 +148,7 @@ namespace YAGuard
         {
             if (arg < 0)
                 throw new ArgumentException(
-                    message ?? "Parameter cannot be negative.", argName ?? ArgHelper.ArgName());
+                    message ?? "Parameter cannot be negative.", argName ?? ArgHelper.ArgName(typeof(Int64)));
 
             return arg;
         }
@@ -150,7 +160,7 @@ namespace YAGuard
         {
             if (arg <= 0)
                 throw new ArgumentException(
-                    message ?? "Parameter cannot be negative or zero.", argName ?? ArgHelper.ArgName());
+                    message ?? "Parameter cannot be negative or zero.", argName ?? ArgHelper.ArgName(typeof(Int64)));
 
             return arg;
         }

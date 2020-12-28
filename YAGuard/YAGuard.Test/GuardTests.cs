@@ -38,5 +38,63 @@ namespace YAGuard.Test
         }
 
         #endregion NotNull
+
+
+        #region Guard method with multiple arguments
+
+        [DataTestMethod]
+        [DataRow(null, "not null")]
+        public void AgainstNull_ForMethodWithMultipleArguments_1stArgShouldBeHandledCorrectly(
+            string arg1, object arg2)
+        {
+            try { Guard.AgainstNull(arg1); }
+            catch (ArgumentNullException ex)
+            {
+                if (ex.ParamName != "arg1")
+                    Assert.Fail($"An exception with an incorrect ParameterName ({ex.ParamName}) was thrown.");
+                if (ex.Message != "Parameter may not be null\r\nParameter name: arg1")
+                    Assert.Fail("An exception with an incorrect message was thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("An exception, other than the expected one was thrown.");
+            }
+        }
+
+        [DataTestMethod]
+        [DataRow("not null", null)]
+        public void AgainstNull_ForMethodWithMultipleArguments_2ndArgShouldBeHandledCorrectly(
+            object arg1, string arg2)
+        {
+            try { Guard.AgainstNull(arg2); }
+            catch (ArgumentNullException ex)
+            {
+                if (ex.ParamName != "arg2")
+                    Assert.Fail($"An exception with an incorrect ParameterName ({ex.ParamName}) was thrown.");
+                if (ex.Message != "Parameter may not be null\r\nParameter name: arg2")
+                    Assert.Fail("An exception with an incorrect message was thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("An exception, other than the expected one was thrown.");
+            }
+        }
+
+        #endregion Guard method with multiple arguments
+
+
+        #region Guard Properties
+
+        public string TestProperty;
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AgainstNull_WithProperty()
+        {
+            TestProperty = null;
+            Guard.AgainstNull(TestProperty);
+        }
+
+        #endregion Guard Properties
     }
 }

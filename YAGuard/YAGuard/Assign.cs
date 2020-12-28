@@ -21,7 +21,7 @@ namespace YAGuard
         /// <exception cref="ArgumentNullException"/>
         public static TValue NotNull<TValue>(TValue value, string argName = null)
         {
-            Guard.AgainstNull(value, argName: argName ?? ArgHelper.ArgName());
+            Guard.AgainstNull(value, argName: argName ?? ArgHelper.ArgName(typeof(TValue)));
             return value;
         }
 
@@ -30,7 +30,7 @@ namespace YAGuard
         /// <exception cref="ArgumentNullException"/>
         public static TValue IfNotNull<TValue>(TValue value, string argName = null)
         {
-            Guard.AgainstNull(value, argName: argName ?? ArgHelper.ArgName());
+            Guard.AgainstNull(value, argName: argName ?? ArgHelper.ArgName(typeof(TValue)));
             return value;
         }
 
@@ -39,11 +39,12 @@ namespace YAGuard
         /// <exception cref="ArgumentException"/>
         public static TValue IfOneOf<TValue>(TValue value, IEnumerable<TValue> supportedValues, string argName = null)
         {
-            Guard.AgainstUnsupportedValues(value, supportedValues, argName: argName ?? ArgHelper.ArgName());
+            Guard.AgainstUnsupportedValues(value, supportedValues, argName: argName ?? ArgHelper.ArgName(typeof(TValue)));
             return value;
         }
 
         #endregion Generic
+
 
         #region Strings
 
@@ -52,7 +53,7 @@ namespace YAGuard
         /// <exception cref="ArgumentException"/>
         public static string IfRepresentsAnInteger(string value, string argName = null)
         {
-            Guard.AgainstNonIntString(value, argName: argName ?? ArgHelper.ArgName());
+            Guard.AgainstNonIntString(value, argName: argName ?? ArgHelper.ArgName(typeof(string)));
             return value;
         }
 
@@ -61,7 +62,7 @@ namespace YAGuard
         /// <exception cref="ArgumentException"/>
         public static int IfRepresentsAnIntegerAsInteger(string value, string argName = null)
         {
-            Guard.AgainstNonIntString(value, argName: argName ?? ArgHelper.ArgName());
+            Guard.AgainstNonIntString(value, argName: argName ?? ArgHelper.ArgName(typeof(string)));
             return int.Parse(value);
         }
 
@@ -70,7 +71,7 @@ namespace YAGuard
         /// <exception cref="ArgumentException"/>
         public static string IfNotNullOrEmpty(string value, string argName = null)
         {
-            Guard.AgainstNullOrEmptyString(value, argName: argName ?? ArgHelper.ArgName());
+            Guard.AgainstNullOrEmptyString(value, argName: argName ?? ArgHelper.ArgName(typeof(string)));
             return value;
         }
 
@@ -79,7 +80,7 @@ namespace YAGuard
         /// <exception cref="ArgumentException"/>
         public static string IfNotNullOrWhiteSpace(string value, string argName = null)
         {
-            Guard.AgainstNullOrWhiteSpaceString(value, argName: argName ?? ArgHelper.ArgName());
+            Guard.AgainstNullOrWhiteSpaceString(value, argName: argName ?? ArgHelper.ArgName(typeof(string)));
             return value;
         }
 
@@ -88,11 +89,12 @@ namespace YAGuard
         /// <exception cref="ArgumentException"/>
         public static string IfNotTooLong(string value, int maxAcceőtableLength, string argName = null)
         {
-            Guard.AgainstLongString(value, maxAcceőtableLength, argName: argName ?? ArgHelper.ArgName());
+            Guard.AgainstLongString(value, maxAcceőtableLength, argName: argName ?? ArgHelper.ArgName(typeof(string)));
             return value;
         }
 
         #endregion Strings
+
 
         #region Collections
 
@@ -102,11 +104,12 @@ namespace YAGuard
         public static TColl IfNotNullOrEmpty<TColl, TItem>(TColl value, string argName = null)
             where TColl : IEnumerable<TItem>
         {
-            Guard.AgainstNullOrEmptyCollection(value, argName: argName ?? ArgHelper.ArgName());
+            Guard.AgainstNullOrEmptyCollection(value, argName: argName ?? ArgHelper.ArgName(typeof(TColl)));
             return value;
         }
 
         #endregion Collections
+
 
         #region Integers
 
@@ -115,7 +118,7 @@ namespace YAGuard
         /// <exception cref="ArgumentException"/>
         public static int IfNonNegative(int value, string argName = null)
         {
-            Guard.AgainstNegativeInt(value, argName: argName ?? ArgHelper.ArgName());
+            Guard.AgainstNegativeInt(value, argName: argName ?? ArgHelper.ArgName(typeof(int)));
             return value;
         }
 
@@ -124,7 +127,7 @@ namespace YAGuard
         /// <exception cref="ArgumentException"/>
         public static int IfPositive(int value, string argName = null)
         {
-            Guard.AgainstNonPositiveInt(value, argName: argName ?? ArgHelper.ArgName());
+            Guard.AgainstNonPositiveInt(value, argName: argName ?? ArgHelper.ArgName(typeof(int)));
             return value;
         }
 

@@ -7,19 +7,32 @@ public void MyFunc(string myArg)
 {
     Guard.AgainstNull(myArg);
     // or
-    string validatedArg = Guard.AgainstNull(myArg);
+    Guard.AgainstNull( () => myArg );
+    // or
+    Guard.AgainstNull(myArg, "myArg");
+    // or
+    Guard.AgainstNull(myArg, nameof(myArg));
 }
 In case myArg is null, this will throw an ArgumentNullException with the correct argument name.
 
-Supports single line argument checking and assignment as well:
-string result = Assign.NotNull(string source);
-will set result to source in case it is not null, or throw an appropriate ArgumentNullException in case it is null.
+You can also use value of the argument immediately like this:
+public void MyFunc(string myArg)
+{
+    string validatedArg1 = Guard.AgainstNull(myArg);
+    // or
+    string validatedArg2 = Guard.AgainstNull( () => myArg );
+    // or
+    string validatedArg3 = Guard.AgainstNull(myArg, "myArg");
+    // or
+    string validatedArg4 = Guard.AgainstNull(myArg, nameof(myArg));
+}
 
 ##Examples
 To validate method arguments:
   public void MyMethod(string myArg)
   {
     Guard.AgainstNull(myArg);              // Will throw ArgumentNullException when myArg is null.
+    Guard.AgainstNull(() => myArg);        // Will throw ArgumentNullException when myArg is null.
     Guard.AgainstNullOrEmptyString(myArg); // Will throw ArgumentException when myArg is null or empty.
     Guard.AgainstLongString(myArg, 10);    // Will throw ArgumentException when myArg is longer then 10 characters.
     
@@ -29,15 +42,25 @@ To validate method arguments:
 
 Use intellisense for a full list of supported validation methods.
 
-To use a single line of code to validate and assign values to variables:
-  public void MyMethod(string myArg)
-  {
-    MyProperty = Guard.AgainstNull(myArg);  // Will throw ArgumentNullException when myArg is null, or assign myArg to MyProperty if not null.
-    ...
-  }
-  
+##Limitations
+All styles detect invalid parameter values correctly, but there are differences in the efficiency in resolving parameter names.
+The expression style
+  Guard.AgainstNull(() => myArg);
+reliably resolves the name of the parameter in most scenarios.
+
+The simple style
+  Guard.AgainstNull(myArg)
+works correctly when there's a single method parameter, or when the type of the guarded parameter is unique in the argument list.
+In case there are two parameters of the same type, the parameter name in the exception thrown will contain both of their names.
+In such cases, use the expression style.
+
 
 #Release History
+##v1.1.x
+Added support for the expression style
+  Guard.Against...( () => myArg );
+Added best effort parameter name resolution to the plain style validation.
+
 ##v1.0.4
 Retired the Assign class, changed Guard methods to return the argument value.
 
