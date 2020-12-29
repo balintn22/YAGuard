@@ -164,10 +164,9 @@ namespace YAGuard
 
         private static T GetArgValue<T>(Expression<Func<T>> argExp)
         {
-            var memberSelector = (MemberExpression)argExp.Body;
-            var constantSelector = (ConstantExpression)memberSelector.Expression;
-            T value = (T)((FieldInfo)memberSelector.Member)
-                .GetValue(constantSelector.Value);
+            // Based on https://stackoverflow.com/questions/2616638/access-the-value-of-a-member-expression
+            MemberExpression right = (MemberExpression)argExp.Body;
+            T value = (T)Expression.Lambda(right).Compile().DynamicInvoke();
             return value;
         }
 

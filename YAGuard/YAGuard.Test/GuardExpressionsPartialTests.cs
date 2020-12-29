@@ -33,5 +33,42 @@ namespace YAGuard.Test
 
             value.Should().Be("not null");
         }
+
+        private enum MyEnums
+        {
+            MyEnum1
+        }
+
+        private class TestClass
+        {
+            public string TestStringProperty { get; } = "Bla";
+            public string TestStringNullProperty { get; } = null;
+            public MyEnums TestEnumProperty { get; } = MyEnums.MyEnum1;
+        }
+
+        [TestMethod]
+        public void GuardExpressions_WhenExpressionContainsAnyProperty_HappyCase()
+        {
+            TestClass testClassInstance = new TestClass();
+
+            Guard.AgainstNull(() => testClassInstance.TestStringProperty);
+
+            Guard.AgainstUnsupportedValues(
+                () => testClassInstance.TestStringProperty,
+                new string[] { "Bla", "Blabla" });
+
+            Guard.AgainstUnsupportedValues(
+                () => testClassInstance.TestEnumProperty,
+                new MyEnums[] { MyEnums.MyEnum1 });
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GuardExpressions_WhenExpressionContainsAnyProperty_ValidationFailure_ShouldWorkAsExpected()
+        {
+            TestClass testClassInstance = new TestClass();
+
+            Guard.AgainstNull(() => testClassInstance.TestStringNullProperty);
+        }
     }
 }
