@@ -20,6 +20,8 @@ namespace YAGuard.Test
             result.Should().Be(goodValue);
         }
 
+        // Note: When compiled for Release, this method is optimized, and parameter
+        // name resolution fails, prompting the developer to use the expression form.
         [TestMethod]
         [DataRow(null)]
         public void NotNull_ShouldFail(string badValue)
