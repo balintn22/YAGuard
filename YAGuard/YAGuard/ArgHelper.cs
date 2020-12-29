@@ -23,6 +23,9 @@ namespace YAGuard
             ParameterInfo[] callingMethodParameters = callingMethod.GetParameters();
 
             // Try to identify the parameter
+            if (callingMethodParameters.Length == 0)
+                return "Couldn't determine the name of the parameter that is failing validation. You may be guarding a variable other than a method parameter or your code may be optimized. For correct results, use the expression syntax i.e. Guard.Against...( () => myArg);";
+
             if (callingMethodParameters.Length == 1)
                 return callingMethodParameters[0].Name;
 
