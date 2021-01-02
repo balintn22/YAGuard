@@ -194,5 +194,30 @@ namespace YAGuard
         }
 
         #endregion Int Checks
+
+
+        #region Type Checks
+
+        /// <summary>
+        /// Validates an argument type.
+        /// The test will succeed if the argument
+        ///  - is of the specified type
+        ///  - is derived from the specifeid type
+        ///  - implements the specified interface
+        /// <returns>In case the validation succeeds, returns the argument value.</returns>
+        /// <exception cref="ArgumentNullException"/>
+        public static TRequired AgainstInvalidType<TRequired>(object arg, string argName = null, string message = null)
+        {
+            if (arg != null && !typeof(TRequired).IsAssignableFrom(arg.GetType()))
+            {
+                throw new ArgumentException(
+                    message ?? $"Parameter must be of type {typeof(TRequired)} or assignable to it.",
+                    argName ?? ArgHelper.ArgName(typeof(object)));
+            }
+
+            return (TRequired)arg;
+        }
+
+        #endregion Type Checks
     }
 }

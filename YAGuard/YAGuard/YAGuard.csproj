@@ -25,11 +25,10 @@ will set result to source in case it is not null, or throw an appropriate Argume
     <PackageProjectUrl>https://github.com/balintn22/YAGuard</PackageProjectUrl>
     <RepositoryUrl>https://github.com/balintn22/YAGuard</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
-    <AssemblyVersion>1.1.1.0</AssemblyVersion>
-    <FileVersion>1.1.1.0</FileVersion>
-    <Version>1.1.1</Version>
-    <PackageReleaseNotes>Simplified (optimized?) expression evaluation.
-Identified issue with optimized release builds.</PackageReleaseNotes>
+    <AssemblyVersion>1.1.2.0</AssemblyVersion>
+    <FileVersion>1.1.2.0</FileVersion>
+    <Version>1.1.2</Version>
+    <PackageReleaseNotes>Added support for argument type validation.</PackageReleaseNotes>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>StrongNamingKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>

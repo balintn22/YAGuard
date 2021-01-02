@@ -96,5 +96,57 @@ namespace YAGuard.Test
         }
 
         #endregion Guard Properties
+
+
+        #region AgainstInvalidType
+
+        private interface ITestInterface
+        {
+            string TestStringProperty { get; }
+        }
+
+        private class TestParentClass
+        {
+        }
+
+        private class TestClass : TestParentClass, ITestInterface
+        {
+            public string TestStringProperty { get; } = "Bla";
+            public string TestStringNullProperty { get; } = null;
+        }
+
+        [DataTestMethod]
+        [DataRow("instead, I'm a string")]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GuardExpressions_AgainstInvalidType_ShouldFail_WhenTypeInvalid(object argOfInvalidType)
+        {
+            Guard.AgainstInvalidType<TestClass>(argOfInvalidType, "string is not a TestClass.");
+        }
+
+        [TestMethod]
+        public void GuardExpressions_AgainstInvalidType_ShouldSucceed_WhenTypeIsExactMatch()
+        {
+            TestClass testClassInstance = new TestClass();
+
+            TestClass result = Guard.AgainstInvalidType<TestClass>(testClassInstance);
+        }
+
+        [TestMethod]
+        public void GuardExpressions_AgainstInvalidType_ShouldSucceed_WhenTypeIsDerivedFromRequiredType()
+        {
+            TestClass testClassInstance = new TestClass();
+
+            TestParentClass result = Guard.AgainstInvalidType<TestParentClass>(testClassInstance, "testClassInstance is is derived from TestParentClass, the check should succeed.");
+        }
+
+        [TestMethod]
+        public void GuardExpressions_AgainstInvalidType_ShouldSucceed_WhenTypeImplementsReuiredInterface()
+        {
+            TestClass testClassInstance = new TestClass();
+
+            ITestInterface result = Guard.AgainstInvalidType<ITestInterface>(testClassInstance, "testClassInstance implements ITestInterface, the test should succeed.");
+        }
+
+        #endregion AgainstInvalidType
     }
 }
