@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.1;net452;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.1;netcoreapp3.1;net452;netstandard2.0;net5.0;net6.0</TargetFrameworks>
     <Authors>Balint Nagy</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Yet Another Guard argument validation package.
@@ -21,16 +21,16 @@ Supports single line argument checking and assignment as well:
 string result = Guard.AgainstNull(string source);
 will set result to source in case it is not null, or throw an appropriate ArgumentNullException in case it is null.</Description>
     <Copyright>Balint Nagy</Copyright>
-    <PackageLicenseUrl>https://github.com/balintn22/YAGuard/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/balintn22/YAGuard</PackageProjectUrl>
     <RepositoryUrl>https://github.com/balintn22/YAGuard</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
-    <AssemblyVersion>1.1.2.0</AssemblyVersion>
-    <FileVersion>1.1.2.0</FileVersion>
-    <Version>1.1.2</Version>
+    <AssemblyVersion>1.1.3.0</AssemblyVersion>
+    <FileVersion>1.1.3.0</FileVersion>
+    <Version>1.1.3</Version>
     <PackageReleaseNotes>Added support for argument type validation.</PackageReleaseNotes>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>StrongNamingKey.snk</AssemblyOriginatorKeyFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp2.1|AnyCPU'">
