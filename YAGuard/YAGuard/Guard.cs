@@ -51,7 +51,7 @@ namespace YAGuard
         /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
         /// </summary>
         /// <param name="argName">The name of the argument to include in case of an exception. If omitted, the argumnet name in the exception will include an educated guess.</param>
-        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
+        /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static T AgainstUnsupportedValues<T>(
             T arg, IEnumerable<T> supportedValues, string argName = null, string message = null)
@@ -76,7 +76,7 @@ namespace YAGuard
         /// Throws if the specified value is not a string representation of an Int32.
         /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
         /// </summary>
-        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
+        /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static string AgainstNonIntString(string arg, string argName = null)
         {
@@ -91,7 +91,7 @@ namespace YAGuard
         /// Throws if the specified value is null or an empty string.
         /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
         /// </summary>
-        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
+        /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static string AgainstNullOrEmptyString(
             string arg, string argName = null, string message = null)
@@ -107,7 +107,7 @@ namespace YAGuard
         /// Throws if the specified value is null, an empty string or whitespace.
         /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
         /// </summary>
-        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
+        /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static string AgainstNullOrWhiteSpaceString(
             string arg, string argName = null, string message = null)
@@ -123,7 +123,7 @@ namespace YAGuard
         /// Throws if the specified value is a string that is too long.
         /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
         /// </summary>
-        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
+        /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static string AgainstLongString(
             string arg, int maxAcceptableLength, string argName = null, string message = null)
@@ -144,9 +144,10 @@ namespace YAGuard
 
         /// <summary>
         /// Throws if the specified value is null or an empty collection.
-        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
+        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters.
+        /// If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.
         /// </summary>
-        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
+        /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static IEnumerable<T> AgainstNullOrEmptyCollection<T>(
             IEnumerable<T> arg, string argName = null, string message = null)
@@ -154,6 +155,40 @@ namespace YAGuard
             if ((arg == null) || (arg.Count() == 0))
                 throw new ArgumentException(
                     message ?? "Parameter cannot be null or an empty collection.", argName ?? ArgHelper.ArgName(typeof(IEnumerable<T>)));
+
+            return arg;
+        }
+
+        /// <summary>
+        /// Throws if the specified collection contains items that are not among the supported values.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="arg">A collection of items, that are checked individually agains the list of supported items.</param>
+        /// <param name="supportedItems"></param>
+        /// <returns>The argument.</returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// <example>
+        /// static void MethodUnderTest(string[] fruits)
+        /// {
+        ///     Guard.AgainstUnsupportedCollectionItems(fruits, new string[] { "apples", "pears" });
+        /// }
+        /// 
+        /// will throw when called like this
+        ///  MethodUnderTest(new string[] { "apples", "microsofts" });
+        /// </example>
+        public static IEnumerable<T> AgainstUnsupportedCollectionItems<T>(
+            IEnumerable<T> arg, IEnumerable<T> supportedItems, string argName = null, string message = null)
+        {
+            if (arg == null || !arg.Any())
+                return arg;
+
+            var invalidArgItems = arg.Where(x => !supportedItems.Contains(x)).ToList();
+            if(invalidArgItems.Any())
+                throw new ArgumentException(
+                    message
+                    ?? $"The collection contains unsupported items " +
+                        $"{string.Join(", ", invalidArgItems.Select(x => "'" + x.ToString()+ "'"))}.",
+                    argName ?? ArgHelper.ArgName(typeof(IEnumerable<T>)));
 
             return arg;
         }
@@ -167,7 +202,7 @@ namespace YAGuard
         /// Throws if the specified integer value is negative.
         /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
         /// </summary>
-        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
+        /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static Int64 AgainstNegativeInt(Int64 arg, string argName = null, string message = null)
         {
@@ -182,7 +217,7 @@ namespace YAGuard
         /// Throws if the specified integer value is zero or negative.
         /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
         /// </summary>
-        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
+        /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static Int64 AgainstNonPositiveInt(Int64 arg, string argName = null, string message = null)
         {

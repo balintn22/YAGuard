@@ -148,5 +148,36 @@ namespace YAGuard.Test
         }
 
         #endregion AgainstInvalidType
+
+
+        #region AgainstUnsupportedCollectionItems
+
+        [TestMethod]
+        public void AgainstUnsupportedCollectionItems_HappyCase()
+        {
+            static void MethodUnderTest(string[] fruits)
+            {
+                Guard.AgainstUnsupportedCollectionItems(fruits, new string[] { "apples", "pears", "raisins" });
+            }
+
+            MethodUnderTest(new string[] { "apples", "pears" });
+        }
+
+        [TestMethod]
+        public void AgainstUnsupportedCollectionItems_ShouldThrowIfItemNotSupported()
+        {
+            static void MethodUnderTest(string[] fruits)
+            {
+                Guard.AgainstUnsupportedCollectionItems(fruits, new string[] { "apples", "pears"});
+            }
+
+            var act = () => MethodUnderTest(new string[] { "apples", "microsofts" });
+
+            act.Should()
+                .Throw<ArgumentException>()
+                .WithMessage("The collection contains unsupported items 'microsofts'. (Parameter 'fruits')");
+        }
+
+        #endregion AgainstUnsupportedCollectionItems
     }
 }

@@ -46,7 +46,7 @@ namespace YAGuard
         #region String Checks
 
         /// <summary>Throws if the specified value is not a string representation of an Int32.</summary>
-        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
+        /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static string AgainstNonIntString(Expression<Func<string>> argExp)
         {
@@ -60,7 +60,7 @@ namespace YAGuard
         }
 
         /// <summary>Throws if the specified value is null or an empty string.</summary>
-        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
+        /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static string AgainstNullOrEmptyString(Expression<Func<string>> argExp, string message = null)
         {
@@ -74,7 +74,7 @@ namespace YAGuard
         }
 
         /// <summary>Throws if the specified value is null, an empty string or whitespace.</summary>
-        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
+        /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static string AgainstNullOrWhiteSpaceString(Expression<Func<string>> argExp, string message = null)
         {
@@ -88,7 +88,7 @@ namespace YAGuard
         }
 
         /// <summary>Throws if the specified value is a string that is too long.</summary>
-        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
+        /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static string AgainstLongString(
             Expression<Func<string>> argExp, int maxAcceptableLength, string message = null)
@@ -110,7 +110,7 @@ namespace YAGuard
         #region Collections
 
         /// <summary>Throws if the specified value is null or an empty collection.</summary>
-        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
+        /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static IEnumerable<T> AgainstNullOrEmptyCollection<T>(
             Expression<Func<IEnumerable<T>>> argExp, string message = null)
@@ -130,7 +130,7 @@ namespace YAGuard
         #region Int Checks
 
         /// <summary>Throws if the specified integer value is negative.</summary>
-        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
+        /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static Int64 AgainstNegativeInt(Expression<Func<Int64>> argExp, string message = null)
         {
@@ -144,7 +144,7 @@ namespace YAGuard
         }
 
         /// <summary>Throws if the specified integer value is zero or negative.</summary>
-        /// <returns>In case the valisation succeeds, returns the argument value.</returns>
+        /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static Int64 AgainstNonPositiveInt(Expression<Func<Int64>> argExp, string message = null)
         {
