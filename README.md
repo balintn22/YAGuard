@@ -57,6 +57,10 @@ In such cases, use the expression style.
 
 
 #Release History
+##v1.1.4
+Added support for validating collection argument items against a set of accepted values.
+    Guard.AgainstUnsupportedCollectionItems(fruits, new string[] { "apples", "pears"});
+
 ##v1.1.x
 Added support for the expression style
   Guard.Against...( () => myArg );
