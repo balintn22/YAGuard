@@ -32,7 +32,7 @@ public void MyFunc(string myArg)
 ```
 ## Examples
 To validate method arguments:
-``
+```
   public void MyMethod(string myArg)
   {
     Guard.AgainstNull(myArg);              // Will throw ArgumentNullException when myArg is null.
