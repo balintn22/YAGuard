@@ -59,6 +59,10 @@ In such cases, use the expression style.
 
 
 # Release History
+## v2.0.0
+Removed support for dotnet core 2.1 because of vulnerabilities there
+Added support for dotner 6, dotnet 7, dotnet 8, .Net Framework 4.8.1
+
 ## v1.1.4
 Added support for validating collection argument items against a set of accepted values.
     `Guard.AgainstUnsupportedCollectionItems(fruits, new string[] { "apples", "pears"});`
