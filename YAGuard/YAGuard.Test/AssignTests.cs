@@ -27,7 +27,10 @@ namespace YAGuard.Test
         public void NotNull_ShouldFail(string badValue)
         {
             try { string result = Assign.NotNull<string>(badValue); }
-            catch (ArgumentNullException ex) { ex.Message.Should().Be("Parameter may not be null\r\nParameter name: badValue"); }
+            catch (ArgumentNullException ex)
+            {
+                ex.Message.Should().Be("Parameter may not be null (Parameter 'badValue')");
+            }
             catch { Assert.Fail(); }
         }
 

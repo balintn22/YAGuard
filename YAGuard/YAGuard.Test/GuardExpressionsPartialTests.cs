@@ -16,7 +16,7 @@ namespace YAGuard.Test
             {
                 if (ex.ParamName != "arg1")
                     Assert.Fail($"An exception with an incorrect ParameterName ({ex.ParamName}) was thrown.");
-                if (ex.Message != "Parameter may not be null\r\nParameter name: arg1")
+                if (ex.Message != "Parameter may not be null (Parameter 'arg1')")
                     Assert.Fail("An exception with an incorrect message was thrown.");
             }
             catch (Exception ex)
