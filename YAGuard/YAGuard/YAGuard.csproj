@@ -27,7 +27,8 @@ will set result to source in case it is not null, or throw an appropriate Argume
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <FileVersion>2.0.0.0</FileVersion>
     <Version>2.0.0</Version>
-    <PackageReleaseNotes>Added support for validating collection argument items against a set of accepted values.</PackageReleaseNotes>
+    <PackageReleaseNotes>Removed support for dotnet core 2.1 because of vulnerabilities there
+Added support for dotner 6, dotnet 7, dotnet 8, .Net Framework 4.8.1</PackageReleaseNotes>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>StrongNamingKey.snk</AssemblyOriginatorKeyFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
