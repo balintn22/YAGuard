@@ -7,7 +7,8 @@ namespace YAGuard.Test
     [TestClass]
     public class GuardTests
     {
-        #region NotNull
+        #region AgainstNull
+
         [TestMethod]
         [DataRow("")]
         [DataRow(" ")]
@@ -43,10 +44,10 @@ namespace YAGuard.Test
             catch { Assert.Fail(); }
         }
 
-        #endregion NotNull
+        #endregion AgainstNull
 
 
-        #region Guard method with multiple arguments
+        #region AgainstNull method with multiple arguments
 
         [DataTestMethod]
         [DataRow(null, "not null")]
@@ -86,7 +87,7 @@ namespace YAGuard.Test
             }
         }
 
-        #endregion Guard method with multiple arguments
+        #endregion AgainstNull method with multiple arguments
 
 
         #region Guard Properties
@@ -163,7 +164,8 @@ namespace YAGuard.Test
         {
             static void MethodUnderTest(string[] fruits)
             {
-                Guard.AgainstUnsupportedCollectionItems(fruits, new string[] { "apples", "pears", "raisins" });
+                var myVar = Guard.AgainstUnsupportedCollectionItems(fruits, new string[] { "apples", "pears", "raisins" });
+                myVar.Should().BeEquivalentTo("apples", "pears");
             }
 
             MethodUnderTest(new string[] { "apples", "pears" });

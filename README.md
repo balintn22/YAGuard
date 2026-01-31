@@ -14,6 +14,16 @@ public void MyFunc(string myArg)
     Guard.AgainstNull(myArg, "myArg");
     // or
     Guard.AgainstNull(myArg, nameof(myArg));
+
+    // or
+
+    var myVar = Guard.AgainstNull(myArg);
+    // or
+    var myVar = Guard.AgainstNull( () => myArg );
+    // or
+    var myVar = Guard.AgainstNull(myArg, "myArg");
+    // or
+    var myVar = Guard.AgainstNull(myArg, nameof(myArg));
 }
 ```
 In case myArg is null, this will throw an ArgumentNullException with the correct argument name.
@@ -36,6 +46,8 @@ To validate method arguments:
 ```
   public void MyMethod(string myArg)
   {
+    // To validate the arguments
+
     Guard.AgainstNull(myArg);              // Will throw ArgumentNullException when myArg is null.
     Guard.AgainstNull(() => myArg);        // Will throw ArgumentNullException when myArg is null.
     Guard.AgainstNullOrEmptyString(myArg); // Will throw ArgumentException when myArg is null or empty.
@@ -43,6 +55,11 @@ To validate method arguments:
     
     MyProperty = myArg;
     ...
+
+    // Most Guard methods return their argument value, so
+    // to validate an argument and assign it to a variable:
+
+    var myVar = Guard.AgainstNull(myArg);
   }
 ```
 Use intellisense for a full list of supported validation methods.
@@ -59,9 +76,13 @@ In such cases, use the expression style.
 
 
 # Release History
+## v2.1.1
+Fixed intellisense exception information.
+Added support for dotnet 9 and dotnet 10
+
 ## v2.0.0
 Removed support for dotnet core 2.1 because of vulnerabilities there
-Added support for dotner 6, dotnet 7, dotnet 8, .Net Framework 4.8.1
+Added support for dotnet 6, dotnet 7, dotnet 8, .Net Framework 4.8.1
 
 ## v1.1.4
 Added support for validating collection argument items against a set of accepted values.

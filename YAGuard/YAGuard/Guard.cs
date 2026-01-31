@@ -25,7 +25,9 @@ namespace YAGuard
 
         /// <summary>
         /// Validates an argument.
-        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
+        /// This is the simplest form, but can only be used when the parameter being validated is the only
+        /// such type in the list of method parameters. If there are more parameters of the same type, or
+        /// you are validating anything but a parameter, use the expression form.</summary>
         /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentNullException"/>
         public static T AgainstNull<T>(T arg, string argName = null, string message = null)
@@ -48,9 +50,14 @@ namespace YAGuard
 
         /// <summary>
         /// Validates an argument against a set of acceptable values.
-        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
+        /// This is the simplest form, but can only be used when the parameter being validated is the only
+        /// such type in the list of method parameters. If there are more parameters of the same type, or
+        /// you are validating anything but a parameter, use the expression form.
         /// </summary>
-        /// <param name="argName">The name of the argument to include in case of an exception. If omitted, the argumnet name in the exception will include an educated guess.</param>
+        /// <param name="argName">
+        /// The name of the argument to include in case of an exception. If omitted, the argumnet name in
+        /// the exception will include an educated guess.
+        /// </param>
         /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
         public static T AgainstUnsupportedValues<T>(
@@ -74,7 +81,9 @@ namespace YAGuard
 
         /// <summary>
         /// Throws if the specified value is not a string representation of an Int32.
-        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
+        /// This is the simplest form, but can only be used when the parameter being validated is the only
+        /// such type in the list of method parameters. If there are more parameters of the same type, or
+        /// you are validating anything but a parameter, use the expression form.
         /// </summary>
         /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
@@ -89,7 +98,9 @@ namespace YAGuard
 
         /// <summary>
         /// Throws if the specified value is null or an empty string.
-        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
+        /// This is the simplest form, but can only be used when the parameter being validated is the only
+        /// such type in the list of method parameters. If there are more parameters of the same type, or
+        /// you are validating anything but a parameter, use the expression form.
         /// </summary>
         /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
@@ -105,7 +116,9 @@ namespace YAGuard
 
         /// <summary>
         /// Throws if the specified value is null, an empty string or whitespace.
-        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
+        /// This is the simplest form, but can only be used when the parameter being validated is the only
+        /// such type in the list of method parameters. If there are more parameters of the same type, or
+        /// you are validating anything but a parameter, use the expression form.
         /// </summary>
         /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
@@ -121,7 +134,9 @@ namespace YAGuard
 
         /// <summary>
         /// Throws if the specified value is a string that is too long.
-        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
+        /// This is the simplest form, but can only be used when the parameter being validated is the only
+        /// such type in the list of method parameters. If there are more parameters of the same type, or
+        /// you are validating anything but a parameter, use the expression form.
         /// </summary>
         /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
@@ -144,8 +159,10 @@ namespace YAGuard
 
         /// <summary>
         /// Throws if the specified value is null or an empty collection.
-        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters.
-        /// If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.
+        /// This is the simplest form, but can only be used when the parameter being validated is the only
+        /// such type in the list of method parameters.
+        /// If there are more parameters of the same type, or you are validating anything but a parameter,
+        /// use the expression form.
         /// </summary>
         /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
@@ -200,7 +217,9 @@ namespace YAGuard
 
         /// <summary>
         /// Throws if the specified integer value is negative.
-        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
+        /// This is the simplest form, but can only be used when the parameter being validated is the only
+        /// such type in the list of method parameters. If there are more parameters of the same type, or
+        /// you are validating anything but a parameter, use the expression form.
         /// </summary>
         /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
@@ -215,7 +234,9 @@ namespace YAGuard
 
         /// <summary>
         /// Throws if the specified integer value is zero or negative.
-        /// This is the simplest form, but can only be used when the parameter being validated is the only such type in the list of method parameters. If there are more parameters of the same type, or you are validating anything but a parameter, use the expression form.</summary>
+        /// This is the simplest form, but can only be used when the parameter being validated is the only
+        /// such type in the list of method parameters. If there are more parameters of the same type, or
+        /// you are validating anything but a parameter, use the expression form.</summary>
         /// </summary>
         /// <returns>In case the validation succeeds, returns the argument value.</returns>
         /// <exception cref="ArgumentException"/>
