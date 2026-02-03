@@ -92,14 +92,46 @@ namespace YAGuard.Test
 
         #region Guard Properties
 
-        public string TestProperty;
+        public string TestField;
+        public string TestProperty { get; set; }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void AgainstNull_WithProperty()
+        public void AgainstNull_WithProperty_ShouldNotThrow_WhenPropertyIsNotNull()
+        {
+            TestProperty = "blah";
+
+            // This should not throw
+            Guard.AgainstNull(() => TestField);
+            Guard.AgainstNull(() => TestProperty);
+        }
+
+        [TestMethod]
+        public void AgainstNull_WithProperty_ShouldThrowExpectedException_WhenPropertyIsNull()
         {
             TestProperty = null;
-            Guard.AgainstNull(TestProperty);
+            // Couldn't find a way to verify a property of a custom exception type using FluentAssertions
+            // so going the cumbersome way to check it.
+            try
+            {
+                Guard.AgainstNull(() => TestProperty);
+                throw new ApplicationException(
+                    "Test was expected to produce an ArgumentNullExcpetion but it didn't produce any exception at all");
+            }
+            catch (ArgumentNullException expectedException)
+            {
+                expectedException.Message.Should().StartWith("Parameter may not be null");
+                expectedException.ParamName.Should().Be("TestProperty");
+            }
+            catch (ApplicationException ae)
+            {
+                throw new Exception("An ArgumentNullException was expected, but some other exception type was thrown", ae);
+            }
+            catch (Exception anyOtherException)
+            {
+                throw new ApplicationException(
+                    "Test was expected to produce an ArgumentNullExcpetion but it produced some other exception type (see InnerEx)",
+                    anyOtherException);
+            }
         }
 
         #endregion Guard Properties

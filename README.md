@@ -44,6 +44,9 @@ public void MyFunc(string myArg)
 ## Examples
 To validate method arguments:
 ```
+  public string MyField;
+  public string MyProperty { get; set; }
+
   public void MyMethod(string myArg)
   {
     // To validate the arguments
@@ -60,6 +63,10 @@ To validate method arguments:
     // to validate an argument and assign it to a variable:
 
     var myVar = Guard.AgainstNull(myArg);
+
+    // To guard field and property values, use the expression form:
+    Guard.AgainstNull( () => MyField );
+    Guard.AgainstNull( () => MyProperty );
   }
 ```
 Use intellisense for a full list of supported validation methods.
@@ -76,6 +83,9 @@ In such cases, use the expression style.
 
 
 # Release History
+## v2.1.2
+Added tests and examples for field and property guarding.
+
 ## v2.1.1
 Fixed intellisense exception information.
 Added support for dotnet 9 and dotnet 10
